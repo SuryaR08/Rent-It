@@ -1,3 +1,4 @@
+// models/property.js
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 
@@ -23,9 +24,10 @@ const Property = sequelize.define('Property', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    listedBy: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+    // Add image field if needed
+    image: {
+        type: DataTypes.STRING, // Assuming you store image URLs
+        allowNull: true, // Change to false if image is required
     },
 }, {
     timestamps: true,

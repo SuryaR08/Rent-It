@@ -6,6 +6,7 @@ import Register from './components/Register';
 import AddProperty from './components/AddProperty';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import './App.css';
 
 const App = () => {
     const [user, setUser] = useState(null);

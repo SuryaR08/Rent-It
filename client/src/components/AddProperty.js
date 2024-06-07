@@ -4,50 +4,67 @@ import { addProperty } from '../services/propertyService';
 import '../addproperty.css';
 
 const AddProperty = ({ token }) => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [location, setLocation] = useState('');
-    const [price, setPrice] = useState('');
     const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        title: '',
+        description: '',
+        location: '',
+        price: '',
+        image: null, // Store selected image file
+    });
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleImageChange = (e) => {
+        setFormData({ ...formData, image: e.target.files[0] }); // Store selected image file
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const { title, description, location, price, image } = formData;
         try {
-            const property = {
-                title,
-                description,
-                location,
-                price: parseFloat(price)
-            };
-            await addProperty(property, token);
-            navigate('/');
+            const propertyData = new FormData();
+            propertyData.append('title', title);
+            propertyData.append('description', description);
+            propertyData.append('location', location);
+            propertyData.append('price', price);
+            propertyData.append('image', image); // Append image file to FormData
+            await addProperty(propertyData, token);
+            alert('Property added successfully');
+            navigate('/'); // Redirect to home page after successful property addition
         } catch (error) {
-            console.error('Error adding property:', error.response?.data || error.message);
+            console.error('Error adding property:', error);
             alert('Error adding property');
         }
     };
 
     return (
         <div className="add-property-container">
-            <form className="add-property-form" onSubmit={handleSubmit}>
-                <h2>Add Property</h2>
-                <div className="form-group">
+            <form onSubmit={handleSubmit} className="add-property-form">
+                <h1>Add New Property</h1>
+                <div>
                     <label>Title:</label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                    <input type="text" name="title" value={formData.title} onChange={handleInputChange} required />
                 </div>
-                <div className="form-group">
+                <div>
                     <label>Description:</label>
-                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+                    <textarea name="description" value={formData.description} onChange={handleInputChange} required></textarea>
                 </div>
-                <div className="form-group">
+                <div>
                     <label>Location:</label>
-                    <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required />
+                    <input type="text" name="location" value={formData.location} onChange={handleInputChange} required />
                 </div>
-                <div className="form-group">
+                <div>
                     <label>Price:</label>
-                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
+                    <input type="number" name="price" value={formData.price} onChange={handleInputChange} required />
                 </div>
-                <button type="submit" className="submit-button">Add Property</button>
+                <div>
+                    <label>Image:</label>
+                    <input type="file" name="image" onChange={handleImageChange} />
+                </div>
+                <button type="submit">Add Property</button>
             </form>
         </div>
     );

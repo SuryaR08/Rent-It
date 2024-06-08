@@ -1,43 +1,39 @@
 /* home.css */
-/* body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-} */
 
 .home-container {
     padding: 20px;
 }
 
 .home-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 .home-header h1 {
-    margin: 0;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .home-header input {
     padding: 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
     width: 300px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.home-header input:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .property-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    justify-content: center;
+    justify-items: center;
 }
 
 .property-card {
@@ -45,13 +41,9 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
     max-width: 300px;
-    flex: 1;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .property-card:hover {
@@ -70,32 +62,33 @@
 }
 
 .property-details h2 {
-    margin: 0 0 10px;
-    font-size: 20px;
+    font-size: 24px;
     color: #333;
+    margin-bottom: 10px;
 }
 
 .property-details p {
-    margin: 5px 0;
-    color: #666;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
 }
 
-.property-details strong {
+.property-details p strong {
     color: #333;
 }
 
-@media (max-width: 768px) {
-    .home-header {
-        flex-direction: column;
+@media (max-width: 1024px) {
+    .home-header input {
+        width: 80%;
     }
+}
 
+@media (max-width: 768px) {
     .home-header input {
         width: 100%;
-        margin-top: 10px;
     }
 
-    .property-list {
-        flex-direction: column;
-        align-items: center;
+    .property-card {
+        max-width: 100%;
     }
 }

@@ -12,7 +12,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.6); /* dark overlay for background image */
 }
 
 .auth-card {
@@ -46,7 +45,7 @@
 
 .auth-card label {
     font-weight: bold;
-    color: #fff;
+    color: #070707;
     margin-bottom: 5px;
     display: block;
 }
@@ -55,7 +54,7 @@
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #2e2c2c;
     font-size: 16px;
     transition: box-shadow 0.3s ease;
 }
@@ -86,7 +85,7 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    color: #fff;
+    color: #050505;
 }
 
 .auth-card .toggle-link {

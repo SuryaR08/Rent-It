@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getAllProperties } from '../services/propertyService';
 import '../home.css';
 
@@ -43,15 +44,17 @@ const Home = () => {
             </header>
             <div className="property-list">
                 {filteredProperties.map(property => (
-                    <div key={property.id} className="property-card">
-                        <img src={`http://localhost:5000/uploads/${property.image}`} alt="Property" className="property-image" />
-                        <div className="property-details">
-                            <h2>{property.title}</h2>
-                            <p>{property.description}</p>
-                            <p><strong>Location:</strong> {property.location}</p>
-                            <p><strong>Price:</strong> ${property.price}</p>
+                    <Link key={property.id} to={`/property/${property.id}`} className="property-card-link">
+                        <div className="property-card">
+                            <img src={`http://localhost:5000/uploads/${property.image}`} alt="Property" className="property-image" />
+                            <div className="property-details">
+                                <h2>{property.title}</h2>
+                                <p>{property.description}</p>
+                                <p><strong>Location:</strong> {property.location}</p>
+                                <p><strong>Price:</strong> ${property.price}</p>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

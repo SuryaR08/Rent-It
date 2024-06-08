@@ -1,0 +1,49 @@
+.property-detail {
+    max-width: 800px;
+    margin: 60px auto 60px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.property-detail h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.property-detail p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.property-detail p strong {
+    color: #333;
+}
+
+.property-detail img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Center align the property detail */
+@media (max-width: 800px) {
+    .property-detail {
+        margin: 20px auto;
+        padding: 10px;
+    }
+}
+
+/* Adjust padding for smaller screens */
+@media (max-width: 600px) {
+    .property-detail {
+        padding: 10px;
+    }
+}

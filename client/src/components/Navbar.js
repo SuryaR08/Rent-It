@@ -11,7 +11,7 @@ const Navbar = ({ user, onLogout }) => {
             <div className="navbar-links">
                 {user ? (
                     <>
-                        <span>Welcome, User</span>
+                        <Link to="/profile">{user.username || 'Profile'}</Link>
                         <Link to="/add-property">Add Property</Link>
                         <button onClick={onLogout}>Logout</button>
                     </>

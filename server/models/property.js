@@ -1,6 +1,6 @@
-// models/property.js
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
+const User = require('./user');
 
 const Property = sequelize.define('Property', {
     id: {
@@ -24,10 +24,17 @@ const Property = sequelize.define('Property', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    // Add image field if needed
     image: {
-        type: DataTypes.STRING, // Assuming you store image URLs
-        allowNull: true, // Change to false if image is required
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: User,
+            key: 'id',
+        },
     },
 }, {
     timestamps: true,

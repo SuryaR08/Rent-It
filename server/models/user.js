@@ -1,3 +1,5 @@
+// models/user.js
+
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 
@@ -21,13 +23,9 @@ const User = sequelize.define('User', {
         allowNull: false,
         unique: true,
     },
-    phoneNumber: {
+    phone: {
         type: DataTypes.STRING,
-        allowNull: false,
-    },
-    favoriteProperties: {
-        type: DataTypes.JSON,
-        defaultValue: [],
+        allowNull: true,
     },
 }, {
     timestamps: true,

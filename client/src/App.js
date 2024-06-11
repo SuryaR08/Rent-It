@@ -8,7 +8,7 @@ import PropertyDetail from './components/PropertyDetail';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Profile from './components/Profile';
-import EditProperty from './components/EditProperty'; // Import EditProperty component
+import EditProperty from './components/EditProperty'; 
 import './App.css';
 
 const App = () => {
@@ -44,7 +44,7 @@ const App = () => {
                 <Route path="/register" element={<Register />} />
                 {user && <Route path="/add-property" element={<AddProperty token={user.token} userId={user.id} />} />}
                 {user && <Route path="/profile" element={<Profile userId={user.id} token={user.token} />} />} 
-                {user && <Route path="/editproperty/:propertyId" element={<EditProperty />} />} {/* Add EditProperty route */}
+                {user && <Route path="/editproperty/:propertyId" element={<EditProperty />} />} 
                 
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>

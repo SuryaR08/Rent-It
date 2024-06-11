@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../profile.css'; // Import the CSS file
+import { getUserFavorites, removeFromFavorites } from '../services/propertyService';
+import '../profile.css';
 
 const Profile = () => {
     const [user, setUser] = useState(null);
+    const [favorites, setFavorites] = useState([]);
     const [properties, setProperties] = useState([]);
     const navigate = useNavigate();
 
@@ -62,8 +64,24 @@ const Profile = () => {
             }
         };
 
+        const fetchUserFavorites = async () => {
+            const token = sessionStorage.getItem('token');
+            if (!token) {
+                console.error('No token found');
+                return;
+            }
+
+            try {
+                const favoriteData = await getUserFavorites(token);
+                setFavorites(favoriteData);
+            } catch (error) {
+                console.error('Error fetching user favorites:', error);
+            }
+        };
+
         fetchUserData();
         fetchProperties();
+        fetchUserFavorites();
     }, []);
 
     const handleEdit = (propertyId) => {
@@ -86,7 +104,6 @@ const Profile = () => {
             });
 
             if (response.ok) {
-                // Remove the deleted property from the state
                 setProperties(properties.filter(property => property.id !== propertyId));
             } else {
                 const errorData = await response.json();
@@ -94,6 +111,21 @@ const Profile = () => {
             }
         } catch (error) {
             console.error('Error:', error);
+        }
+    };
+
+    const handleRemoveFromFavorites = async (propertyId) => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            console.error('No token found');
+            return;
+        }
+
+        try {
+            await removeFromFavorites(propertyId, token);
+            setFavorites(favorites.filter(favorite => favorite.Property.id !== propertyId));
+        } catch (error) {
+            console.error('Error removing from favorites:', error);
         }
     };
 
@@ -131,6 +163,27 @@ const Profile = () => {
                 </div>
             ) : (
                 <p>No properties found.</p>
+            )}
+            {favorites.length > 0 && (
+                <div className="favorites-section">
+                    <h2>Favorite Properties</h2>
+                    <div className="property-list">
+                        {favorites.map((favorite) => (
+                            <div key={favorite.id} className="property-card">
+                                <div className="property-details">
+                                    <h2>{favorite.Property.title}</h2>
+                                    <p>{favorite.Property.description}</p>
+                                    <p>{favorite.Property.location}</p>
+                                    <p>${favorite.Property.price}</p>
+                                    {favorite.Property.image && <img src={`http://localhost:5000/uploads/${favorite.Property.image}`} alt={favorite.Property.title} className="property-image" />}
+                                </div>
+                                <div className="property-buttons">
+                                    <button className="remove-favorite" onClick={() => handleRemoveFromFavorites(favorite.Property.id)}>Remove from Favorites</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             )}
         </div>
     );

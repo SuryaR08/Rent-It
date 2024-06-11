@@ -17,7 +17,7 @@
 
 .home-header input {
     padding: 10px;
-    width: 300px;
+    width: 500px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -41,14 +41,27 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    max-width: 300px;
     width: 100%;
+    max-width: 350px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
 }
 
 .property-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.property-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .property-image {
@@ -59,6 +72,10 @@
 
 .property-details {
     padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .property-details h2 {
@@ -75,6 +92,29 @@
 
 .property-details p strong {
     color: #333;
+}
+
+.property-footer {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 1024px) {

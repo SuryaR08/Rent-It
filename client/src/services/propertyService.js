@@ -54,13 +54,63 @@ export const deleteProperty = async (propertyId, token) => {
     }
 };
 
-
 export const getPropertyById = async (propertyId) => {
     try {
         const response = await axios.get(`${API_URL}/${propertyId}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching property by ID:', error);
+        throw error;
+    }
+};
+
+export const addToFavorites = async (propertyId, token) => {
+    try {
+        const response = await axios.post('http://localhost:5000/favorites', { propertyId }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error adding to favorites:', error);
+        throw error;
+    }
+};
+
+
+
+export const getUserFavorites = async (token) => {
+    try {
+        const response = await axios.get('http://localhost:5000/favorites', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user favorites:', error);
+        throw error;
+    }
+};
+
+
+// propertyService.js
+export const removeFromFavorites = async (propertyId, token) => {
+    try {
+        const response = await fetch(`http://localhost:5000/favorites/${propertyId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+        }
+    } catch (error) {
+        console.error('Error removing from favorites:', error);
         throw error;
     }
 };

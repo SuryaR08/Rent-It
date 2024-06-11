@@ -8,6 +8,7 @@ const { initModels } = require('./models');
 const authRoutes = require('./routes/authRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
 const userRoutes = require('./routes/userRoutes');
+const favoriteRoutes = require('./routes/favouriteRoutes');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/auth', authRoutes);
 app.use('/properties', propertyRoutes);
 app.use('/users', userRoutes);
+app.use('/favorites', favoriteRoutes);
 
 const PORT = process.env.PORT || 5000;
 
